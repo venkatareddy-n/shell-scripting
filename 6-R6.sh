@@ -5,4 +5,8 @@ read -p "Enter your name: " name
 
 read -t 10 -p "Enter your password in 10 seconds: " password
 
-echo "Hello $name your password is: $password"
+if [ -z "$password" ]; then
+    echo "Hello $name you are not entered Password in 10 seconds"
+else
+    echo "Hello $name your password is: $password"
+fi
