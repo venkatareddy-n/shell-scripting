@@ -3,7 +3,7 @@
 # Reading input and timeout
 read -p "Enter your name: " name
 
-read -t 10 -p "Enter your password in 10 seconds: " password
+read -t 10 -s -p "Enter your password in 10 seconds: " password
 
 if [ -z "$password" ]; then
     echo "Hello $name you are not entered Password in 10 seconds"
