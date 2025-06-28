@@ -3,6 +3,9 @@
 # Reading input and timeout
 read -p "Enter your name: " name
 
+# -s secure
+# -p prompt
+# -t time seconds
 read -t 10 -s -p "Enter your password in 10 seconds: " password
 
 if [ -z "$password" ]; then

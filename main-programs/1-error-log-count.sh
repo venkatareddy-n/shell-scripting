@@ -1,3 +1,4 @@
+
 #!/bin/bash
 
 # Usage: ./error_summary.sh <logfile>
