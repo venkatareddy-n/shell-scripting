@@ -1,5 +1,5 @@
-2025-06-28T11:23:10.1234567Z ##[section]Starting: Venkat Error Publish results
-2025-06-28T11:23:10.1234567Z ##[section]Starting: Swapna Error Publish results
+2025-06-28T11:23:10.1234567Z ##[section]Starting: Venkat Error Publish1 results
+2025-06-28T11:23:10.1234567Z ##[section]Starting: Swapna Error Publish1 results
 2025-06-28T11:23:01.1234567Z Starting: Build Job
 2025-06-28T11:23:01.2345678Z Agent name: Hosted Agent 1
 
@@ -22,9 +22,9 @@
 2025-06-28T11:23:06.3456789Z ##[section]Finishing: Install dependencies
 2025-06-28T11:23:06.4567890Z ##[section]Starting: Build
 2025-06-28T11:23:06.5678901Z ##[command]npm run build
-2025-06-28T11:23:10.1234567Z ##[section]Starting: Venkat Error Publish results
+2025-06-28T11:23:10.1234567Z ##[section]Starting: Venkat Error Publish2 results
 
-2025-06-28T11:23:10.1234567Z ##[section]Starting: Swapna Error Publish results
+2025-06-28T11:23:10.1234567Z ##[section]Starting: Swapna Error Publish2 results
 2025-06-28T11:23:07.6789012Z > my-app@1.0.0 build /home/vsts/work/1/s
 2025-06-28T11:23:07.7890123Z > webpack --config webpack.config.js
 2025-06-28T11:23:08.1234567Z Arithmetic ERROR in ./src/index.js
@@ -32,9 +32,9 @@
 2025-06-28T11:23:08.3456789Z  @ ./src/index.js 10:0-42
 2025-06-28T11:23:08.4567890Z ##vso[task.logissue type=error;sourcepath=src/index.js;linenumber=10;]Module not found: './components/MissingComponent'
 2025-06-28T11:23:08.5678901Z ##[error]webpack failed with exit code 2
-ts
-2025-06-28T11:23:10.1234567Z ##[section]Starting: Venkat Error Publish results
-2025-06-28T11:23:10.1234567Z ##[section]Starting: Swapna Error Publish results
+
+2025-06-28T11:23:10.1234567Z ##[section]Starting: Venkat Error Publish3 results
+2025-06-28T11:23:10.1234567Z ##[section]Starting: Swapna Error Publish3 results
 2025-06-28T11:23:09.1234567Z ##[command]npm test
 2025-06-28T11:23:09.2345678Z FAIL  src/__tests__/app.test.js
 
@@ -47,5 +47,5 @@ ts
 2025-06-28T11:23:10.5678901Z ##[error]The build job failed. See logs above for details.
 2025-06-28T11:26:01.123Z ERROR: arithmetic error detected in module calculation; arithmetic error occurred during division; arithmetic error: division by zero; arithmetic error: invalid operand; arithmetic error: overflow exception.
 
-2025-06-28T11:23:10.1234567Z ##[section]Starting: Venkat Error Publish results
-2025-06-28T11:23:10.1234567Z ##[section]Starting: Swapna Error Publish results
+2025-06-28T11:23:10.1234567Z ##[section]Starting: Venkat Error Publish4 results
+2025-06-28T11:23:10.1234567Z ##[section]Starting: Swapna Error Publish4 results
