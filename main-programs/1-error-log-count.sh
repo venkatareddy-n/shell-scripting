@@ -6,12 +6,12 @@
 LOGFILE="$1"
 
 if [ -z "$LOGFILE" ]; then
-    echo "Usage: $0 <logfile>"
+    echo "Usage: sh $0 <logfile_name>"
     exit 1
 fi
 
 if [ ! -f "$LOGFILE" ]; then
-    echo "Error: File '$LOGFILE' not found!"
+    echo "Error: Log File '$LOGFILE' not found!"
     exit 2
 fi
 

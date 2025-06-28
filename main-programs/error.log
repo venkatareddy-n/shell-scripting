@@ -1,0 +1,55 @@
+2025-06-28T11:23:01.1234567Z Starting: Build Job
+2025-06-28T11:23:01.2345678Z Agent name: Hosted Agent 1
+2025-06-28T11:23:01.3456789Z Agent machine name: fv-az123-456
+2025-06-28T11:23:01.4567890Z Current agent version: 3.220.5
+2025-06-28T11:23:01.5678901Z Prepare build directory
+2025-06-28T11:23:01.6789012Z ##[section]Starting: Initialize job
+2025-06-28T11:23:01.7890123Z Agent environment resources - Disk: D:\ Available 12342.00 MB out of 14333.00 MB, Memory: Used 1907.00 MB out of 7167.00 MB, CPU: Usage 17.23%
+2025-06-28T11:23:02.1234567Z ##[section]Finishing: Initialize job
+2025-06-28T11:23:02.2345678Z ##[section]Starting: Checkout
+2025-06-28T11:23:02.3456789Z Syncing repository: my-repo (Git)
+2025-06-28T11:23:02.4567890Z ##[command]git version
+2025-06-28T11:23:02.5678901Z git version 2.41.0
+2025-06-28T11:23:02.6789012Z ##[command]git fetch --force --tags --prune --progress --no-recurse-submodules origin
+2025-06-28T11:23:02.7890123Z ##[section]Finishing: Checkout
+2025-06-28T11:23:03.1234567Z ##[section]Starting: Install dependencies
+2025-06-28T11:23:03.2345678Z ##[command]npm install
+2025-06-28T11:23:04.3456789Z npm WARN deprecated request@2.88.2: request has been deprecated
+2025-06-28T11:23:05.4567890Z npm ERR! code E404
+2025-06-28T11:23:05.5678901Z npm ERR! 404 Not Found - GET https://registry.npmjs.org/some-missing-package - Not found
+2025-06-28T11:23:05.6789012Z npm ERR! 404
+2025-06-28T11:23:05.7890123Z npm ERR! 404  'some-missing-package@^1.0.0' is not in the npm registry.
+2025-06-28T11:23:06.1234567Z ##vso[task.logissue type=error;sourcepath=package.json;linenumber=15;]Failed to install dependencies: some-missing-package not found.
+2025-06-28T11:23:06.2345678Z ##[error]npm install failed with exit code 1
+2025-06-28T11:23:06.3456789Z ##[section]Finishing: Install dependencies
+2025-06-28T11:23:06.4567890Z ##[section]Starting: Build
+2025-06-28T11:23:06.5678901Z ##[command]npm run build
+2025-06-28T11:23:10.1234567Z ##[section]Starting: Venkat Error Publish results
+2025-06-28T11:23:10.1234567Z ##[section]Starting: Swapna Error Publish results
+2025-06-28T11:23:07.6789012Z > my-app@1.0.0 build /home/vsts/work/1/s
+2025-06-28T11:23:07.7890123Z > webpack --config webpack.config.js
+2025-06-28T11:23:08.1234567Z ERROR in ./src/index.js
+2025-06-28T11:23:08.2345678Z Module not found: Error: Can't resolve './components/MissingComponent' in '/home/vsts/work/1/s/src'
+2025-06-28T11:23:08.3456789Z  @ ./src/index.js 10:0-42
+2025-06-28T11:23:08.4567890Z ##vso[task.logissue type=error;sourcepath=src/index.js;linenumber=10;]Module not found: './components/MissingComponent'
+2025-06-28T11:23:08.5678901Z ##[error]webpack failed with exit code 2
+2025-06-28T11:23:08.6789012Z ##[section]Finishing: Build
+2025-06-28T11:23:08.7890123Z ##[section]Starting: Run tests
+2025-06-28T11:23:10.1234567Z ##[section]Starting: Venkat Error Publish results
+2025-06-28T11:23:10.1234567Z ##[section]Starting: Swapna Error Publish results
+2025-06-28T11:23:09.1234567Z ##[command]npm test
+2025-06-28T11:23:09.2345678Z FAIL  src/__tests__/app.test.js
+2025-06-28T11:23:09.3456789Z   ● Test suite failed to run
+2025-06-28T11:23:09.4567890Z     Cannot find module '../components/MissingComponent'
+2025-06-28T11:23:09.5678901Z ##vso[task.logissue type=error;sourcepath=src/__tests__/app.test.js;linenumber=3;]Test suite failed: Cannot find module '../components/MissingComponent'
+2025-06-28T11:23:09.6789012Z ##[error]Test run failed with exit code 1
+2025-06-28T11:23:09.7890123Z ##[section]Finishing: Run tests
+2025-06-28T11:23:10.1234567Z ##[section]Starting: Publish results
+2025-06-28T11:23:10.2345678Z ##[error]No test results found to publish.
+2025-06-28T11:23:10.3456789Z ##[section]Finishing: Publish results
+2025-06-28T11:23:10.4567890Z ##[section]Finishing: Build Job
+2025-06-28T11:23:10.5678901Z ##[error]The build job failed. See logs above for details.
+2025-06-28T11:26:01.123Z ERROR: arithmetic error detected in module calculation; arithmetic error occurred during division; arithmetic error: division by zero; arithmetic error: invalid operand; arithmetic error: overflow exception.
+
+2025-06-28T11:23:10.1234567Z ##[section]Starting: Venkat Error Publish results
+2025-06-28T11:23:10.1234567Z ##[section]Starting: Swapna Error Publish results
