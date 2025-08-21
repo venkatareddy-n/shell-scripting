@@ -1,0 +1,1595 @@
+shell scripting
+===============
+
+What is shell?
+
+-> shell refers to a user interface that allows users to interact with the operating system (OS) or execute commands. 
+
+-> It acts as a command interpreter, taking commands entered by the user (via a command-line interface or graphical interface) and executing them by communicating with the OS kernel.
+
+-> In most of Linux OS BASH[Bourne Again SHell] is the default shell type.
+
+-> There are other shell programs are there,
+   1. Korn shell
+   2. Bash
+   3. C Shell(csh)
+   4. Z Shell(zsh),, etc
+
+How to check How many shells are there in my Linux server?
+
+cat /etc/shells
+
+How to install csh?
+
+sudo yum install csh -y
+sudo yum install zsh -y
+sudo yum install ksh -y
+
+
+How to check which shell we are using now?
+
+echo $SHELL
+echo $0
+ps -p $$
+
+How switch to another shell?
+step 1: check what are the shells are available
+       cat /etc/shells
+step 2: How to switch to another shell
+      /bin/sh ---> run this
+     ps -p $$
+step 3: come back to bash ---> /bin/bash
+
+  
+===================================
+
+what is shell scripting?
+========================
+--> It is a file , contains collections of commands, What ever the order we specified based on that order it will be executed.
+
+what is the extension for shell scripting?
+ANS:  .sh
+
+Why we need to learn the shell script?
+=======================================
+Ans: To automating the manual tasks.
+
+Is it only for DevOps Engineers?
+Ans: NO
+
+EX: 
+1. serverresourseutilization.sh
+2. dbbackup.sh
+
+
+What are the prerequisites to learn shell scripting?
+=====================================================
+1. Linux commands
+2. Basic programming knowledge[depends]
+3. commitment 
+4. Problem solving skills
+
+How to write a shell script?
+=============================
+vi Demo.sh
+
+#!/bin/bash  --> #! --> shebang line
+echo "Welcome to shellscript KK FUNDA"
+echo "Today date is"
+date
+
+How many ways you are going to run the script?
+==============================================
+1. sh Demo.sh
+2. ./Demo.sh  --> chmod u+x Demo.sh
+3. . Demo.sh
+4. bash Demo.sh
+
+
+How to run the shell script in debug mode?
+===========================================
+Ans: 
+1.  sh -x Demo.sh  ---> It will gives the output as command and output
+
+2.  To run few commands in debug mode.
+set -x  ---> starting point
+echo "Welcome to shellscript KK FUNDA"
+echo "Today date is"
+set +x -----> end point
+date
+
+3. sh -x Demo.sh  ---> From starting it will run debug mode until reaches +x
+
+comments in shell scripting
+===========================
+
+--> comments are essential for improving code readability
+--> documenting your script
+--> explaining the purpose of specific commands or sections
+
+Types of Comments:
+=================
+Single-line Comments:
+---------------------
+
+Single-line comments start with # and extend to the end of the line.
+Example:
+# This is a single-line comment
+
+Inline Comments:
+----------------
+Inline comments are placed at the end of a command line to provide brief explanations.
+Example:
+command1  # This command does something
+
+Multi-line Comments:
+--------------------
+
+Shell scripting does not support native multi-line comments like some other programming languages (e.g., /* */ in C/C++). However, you can achieve a similar effect by commenting out multiple lines using #.
+Example:
+# This is
+# a multi-line
+# comment
+
+<<comment
+comment
+
+In java/terraform/groovy script
+===============================
+// single line comment
+/*
+  multi line comment
+*/
+
+XML
+===
+<!-- 
+
+-->
+
+
+Variables in shell scripting???????????
+======================================
+Def: variables are used to store data or values that can be referenced and manipulated throughout the script.
+
+Variable Naming and Assignment:
+-------------------------------
+Variable Naming Rules:
+----------------------
+
+-->Variable names can consist of letters (a-z, A-Z), digits (0-9), and underscores (_).
+-->They must start with a letter or an underscore (_).
+-->Variable names are case-sensitive (myVar is different from MYVAR).
+
+Variable Assignment:
+--------------------
+Assign values to variables using = (no spaces around =)
+
+Example:
+myVar="Hello, World!"
+Quotes (" " or ' ') are used to enclose values to preserve spaces and special characters.
+
+
+Accessing Variables:
+---------------------
+
+Use $ followed by the variable name to access its value.
+
+Example:
+echo "The value of myVar is: $myVar"
+
+Variable Expansion:
+-------------------
+Variables are expanded when referenced with $.
+Example:
+name="Alice"
+echo "Hello, $name!"
+
+Concatenation:
+--------------
+Concatenate strings using variables.
+Example:
+greeting="Hello"
+target="World"
+echo "$greeting, $target!"
+
+
+Types of variables
+=================
+Environment Variables[System defined variables]
+-----------------------------------------------
+
+Variables inherited from the shell environment or explicitly exported using export.
+
+env or printenv ---> Used to get the system variables.
+
+echo "Current user: $USER"
+
+expose
+------
+It is a command to override the system defined values.
+EX: echo $HISTSIZE
+    export HISTSIZE=300
+    echo $HISTSIZE
+
+NOTE: It is only for particular session, How to change permanently?
+     ~/.bash_profile
+     export HISTSIZE=300
+
+
+
+
+Local Variables or user defined variables
+-----------------------------------------
+
+Variables defined within a script are local by default and are only accessible within the script.
+
+EX:
+   a=10
+   b=90
+   name="kkfunda"
+
+  echo $a
+  echo $b
+  echo $name
+
+
+
+
+Naming conventions
+==================
+-> file name max limit is 255 characters.
+-> The file name may contain alphabet, numbers, dots and underscore
+-> System commands or Linux reserved words cant be used.
+-> File System is case sensitive.
+ EX:
+     if
+     fi
+     for
+     mkdir
+     pwd
+
+
+
+
+
+
+Command line arguments in shell scripting
+==========================================
+
+Command line arguments in shell scripting allow you to pass arguments or parameters to a script when it is executed from the command line.
+
+Accessing Command Line Arguments:
+----------------------------------
+$0 ---> script name
+$1 ---> First argument
+$2 ---> second argument
+
+Note: If it is more than one number keep it like this ${10}
+
+Ex:
+#!/bin/bash
+echo "Script name: $0"
+echo "First argument: $1"
+echo "Second argument: $2"
+
+sh Demo.sh Prasanth reddy
+
+
+Special Variables:
+------------------
+$#: Number of arguments passed to the script.
+$@: All arguments passed to the script as separate words ("$1" "$2" ...).
+$*: All arguments passed to the script as a single string ("$1 $2 ..." ).
+$$: It will display the process id[PID]
+
+$? ---> Previous command execution status.
+ 0--> previous command execution status is success
+ 127--> Command not found
+
+
+
+
+
+
+08/07/2024
+==========
+
+How to read a value at runtime in shell scripting?
+===================================================
+
+1. Read basic input
+-----------------------
+
+#!/bin/bash
+
+# Prompt user to enter their name
+echo "Enter your name:"
+read name
+
+echo "Hello, $name! Welcome to the script."
+
+
+
+2. Using -p Option for Prompt
+-----------------------------
+
+#!/bin/bash
+
+# Prompt user for input with a custom prompt
+read -p "Enter your age: " age
+
+echo "You entered: $age years old."
+
+
+3. Read the input one after another
+-----------------------------------
+#!/bin/bash
+
+# Reading multiple values
+echo "Please enter your name:"
+read name
+
+echo "Please enter your age:"
+read age
+
+# Output a summary of the entered details
+echo "Hello, $name! You are $age years old."
+
+
+
+#!/bin/bash
+
+# Reading multiple values
+echo "Please enter your name and Age:"
+read name age1
+
+# Output a summary of the entered details
+echo "Hello, $name! You are $age1 years old."
+
+4. Reading input as an array
+-----------------------------
+
+we will discuss in arrays
+
+
+
+5. Reading Input with Timeout
+------------------------------
+
+#!/bin/bash
+
+# Prompt user for input with a timeout
+read -t 10 -p "Enter your password within 10 seconds: " password
+
+if [ -z "$password" ]; then
+    echo "No password entered within 10 seconds."
+else
+    echo "Password entered: $password"
+fi
+
+
+6. Reading Input Silently (Password Input)
+------------------------------------------
+
+#!/bin/bash
+
+# Prompt user for password input (silent)
+read -s -p "Enter your password: " password
+echo    # Move to a new line after password input
+
+# Validate or process the password input
+echo "Password entered."
+
+
+Operators in shell scripting
+=============================
+
+In shell scripting, operators are used to perform various operations like arithmetic, comparison, logical operations, and string manipulations. Here's a detailed overview of different types of operators in shell scripting with examples:
+
+1. Arithmetic Operators
+--------------------------
+#!/bin/bash
+
+# Arithmetic Operators
+a=20
+b=5
+echo "Arithmetic Operations:"
+echo "Addition o two numbers $(( a + b ))"
+echo "a - b = $(( a - b ))"
+echo "a * b = $(( a * b ))"
+echo "a / b = $(( a / b ))"
+echo "a % b = $(( a % b ))"
+
+sh open1.sh  20 5
+
+$1, $2
+
+2. Comparison Operators
+------------------------
+
+a=20
+b=30
+
+echo "Comparison Operations:"
+if [ $a -eq $b ]; then  #==
+    echo "a is equal to b"
+fi
+if [ $a -ne $b ]; then #!=
+    echo "a is not equal to b"
+fi
+if [ $a -gt $b ]; then #>
+    echo "a is greater than b"
+fi
+if [ $a -lt $b ]; then  #<
+    echo "a is less than b"
+fi
+
+-ge(>=) ---> greater than equal to
+-le(<=) ---> less than equal to
+
+3. Logical Operators
+--------------------
+&&[AND]
+===
+
+A   B  A&&B
+------------
+T   T   T
+T   F   F
+F   T   F
+F   F   F
+
+
+||[OR]
+---
+A    B   A||B
+--------------
+T    T     T
+T    F     T
+F    T     T
+F    F     F
+
+
+a=30
+b=5
+echo "Logical Operations:"
+if [ $a -eq 20 ] && [ $b -eq 5 ]; then
+    echo "Both conditions are true"
+fi
+if [ $a -eq 10 ] || [ $b -eq 5 ]; then
+    echo "At least one condition is true"
+fi
+if ! [ $a -eq 0 ]; then
+    echo "a is not equal to 0"
+fi
+
+4. String Operators
+-------------------
+
+# String Operators
+str1="Hello"
+str2="World"
+echo "String Operations:"
+echo "=================="
+if [ "$str1" = "$str2" ]; then
+    echo "Strings are equal"
+fi
+if [ "$str1" != "$str2" ]; then
+    echo "Strings are not equal"
+fi
+str3="$str1 $str2"
+echo "Concatenated string: $str3"
+length=${#str1}
+echo "Length of str1 is $length"
+
+control statements in shell scripting
+======================================
+
+Control statements in shell scripting allow you to control the flow of execution based on certain conditions or loops. They help in making decisions, repeating code blocks, and branching based on conditions. Here’s a detailed explanation of the main control statements in shell scripting:
+
+
+1. if statement
+----------------
+if [ condition ]; then
+    # Code block to execute if condition is true
+fi
+
+2. if-else Statement
+--------------------
+
+The if-else statement allows you to execute a block of code if a specified condition is true, otherwise, another block of code is executed.
+
+Syntax:
+
+if [ condition ] 
+then
+    # Code block to execute if condition is true
+else
+    # Code block to execute if condition is false
+fi
+
+Example 1:
+-----------
+#!/bin/bash
+
+# Example of if-else statement
+a=10
+
+if [ $a -eq 10 ]; then
+    echo "Value of a is 10"
+else
+    echo "Value of a is not 10"
+fi
+
+Example 2:
+----------
+#!/bin/bash
+
+# Example of checking file existence using if and else statement
+file="demo.sh"
+
+if [ -f "$file" ]
+then
+    echo "File $file exists."
+else
+    echo "File $file does not exist."
+fi
+
+Example 3:  Checking Connectivity
+----------  
+
+#!/bin/bash
+
+# Example of using if-else to check internet connectivity
+ping_result=$(ping -c 1 google.com 2>&1)
+
+if [[ $ping_result == *"icmp_seq"* ]]
+then
+    echo "Internet connectivity is up."
+else
+    echo "Internet connectivity is down."
+fi
+
+3. if-elif-else Statement
+-------------------------
+
+The if-elif-else statement allows you to test multiple conditions and execute a block of code as soon as one of the conditions evaluates to true.
+
+Syntax:
+-------
+
+
+if [ condition1 ]; then
+    # Code block to execute if condition1 is true
+elif [ condition2 ]; then
+    # Code block to execute if condition2 is true
+else
+    # Code block to execute if all conditions are false
+fi
+
+
+Example: 1
+-----------
+
+#!/bin/bash
+
+# Example of if-elif-else statement
+
+a=20
+if [ $a -eq 10 ]; then
+    echo "Value of a is 10"
+elif [ $a -eq 20 ]; then
+    echo "Value of a is 20"
+else
+    echo "Value of a is neither 10 nor 20"
+fi
+
+Example 2:  Checking Disk Space and Taking Action
+-----------
+
+#!/bin/bash
+
+# Example of using if-elif-else to check disk space and take action
+threshold_critical=15
+threshold_warning=12
+current_usage=$(df -h / | awk 'NR==2 {print $5}' | cut -d'%' -f1)
+
+echo "Current disk usage: $current_usage%"
+
+if [ $current_usage -ge $threshold_critical ]  # >=
+then
+    echo "Disk usage is critical ($current_usage%). Taking immediate action!"
+    # Add commands to free up disk space or notify administrators
+elif [ $current_usage -ge $threshold_warning ]
+then
+    echo "Disk usage is high ($current_usage%). Consider freeing up space."
+    # Add commands to optimize disk usage
+else
+    echo "Disk usage is normal ($current_usage%)."
+fi
+
+
+Example 3:
+----------
+
+#!/bin/bash
+
+# Example of using if-elif-else to handle different types of user input
+read -p "Enter a number (1-3): " num
+
+if [ "$num" -eq 1 ]
+then
+    echo "You entered the number one."
+elif [ "$num" -eq 2 ]
+then
+    echo "You entered the number two."
+elif [ "$num" -eq 3 ]
+then
+    echo "You entered the number three."
+else
+    echo "Invalid input: Please enter a number between 1 and 3."
+fi
+
+
+Example 4:  Checking Network Connectivity Status
+----------
+
+#!/bin/bash
+
+# Example of using if-elif-else to check network connectivity status
+ping_result=$(ping -c 1 google.com 2>&1)
+
+if [[ $ping_result == *"icmp_seq"* ]]
+then
+    echo "Internet connectivity is up."
+elif [[ $ping_result == *"unknown host"* ]]
+then
+    echo "Unable to resolve DNS. Check your network configuration."
+else
+    echo "Internet connectivity is down."
+fi
+
+
+
+4. case statement in shell scripting
+------------------------------------
+
+syntax:
+-------
+case variable in
+    pattern1)
+        # Commands to execute if variable matches pattern1
+        ;;
+    pattern2)
+        # Commands to execute if variable matches pattern2
+        ;;
+    pattern3 | pattern4)
+        # Commands to execute if variable matches either pattern3 or pattern4
+        ;;
+    *)
+        # Default commands to execute if variable matches none of the above patterns
+        ;;
+esac
+
+
+
+
+
+Example 1:
+--------
+#!/bin/bash
+
+# Example of a basic case statement
+fruit="apple"
+
+case $fruit in
+    apple)
+        echo "It's a fruit: apple."
+        ;;
+    banana)
+        echo "It's a fruit: banana."
+        ;;
+    orange | mandarin)
+        echo "It's a citrus fruit."
+        ;;
+    *)
+        echo "Unknown fruit."
+        ;;
+esac
+
+Example 2: Checking Days of the Week
+---------
+#!/bin/bash
+
+# Example of using case to check days of the week
+day="Monday"
+
+case $day in
+    Monday | Tuesday | Wednesday | Thursday | Friday)
+        echo "$day is a weekday."
+        ;;
+    Saturday | Sunday)
+        echo "$day is a weekend day."
+        ;;
+    *)
+        echo "Invalid day."
+        ;;
+esac
+
+
+Example 3: Handling Menu Options
+----------
+#!/bin/bash
+
+# Example of using case to handle menu options
+echo "Menu:"
+echo "====="
+echo "1. Display date"
+echo "2. Display calendar"
+echo "3. Display current directory"
+echo "4. Exit"
+
+read -p "Enter your choice: " choice
+
+case $choice in
+    1)
+        date
+        ;;
+    2)
+        cal
+        ;;
+    3)
+        pwd
+        ;;
+    4)
+        echo "Exiting program."
+        exit 0
+        ;;
+    *)
+        echo "Invalid choice: $choice. Please enter a number between 1 and 4."
+        ;;
+esac
+
+
+
+scp -i /c/Users/gpras/Downloads/testmc.pem /c/Users/gpras/Downloads/Shell_Scripting_New.txt ec2-user@13.232.216.223:/home/ec2-user/
+
+
+scp -i /c/Users/gpras/Downloads/testmc.pem ec2-user@13.232.216.223:/home/ec2-user/R2.sh  /c/Users/gpras/Downloads/R2.sh 
+
+
+
+
+9/07/2024
+==========
+
+
+what is a loop in SS?
+----------------------
+
+
+for Loop
+========
+
+syntax:
+-------
+for variable in list
+do
+    # Commands to execute for each item in the list
+done
+
+
+Example 1:
+----------
+
+#!/bin/bash
+
+# Example of a for loop iterating over a list of numbers
+for num in 1 2 3 4 5
+do in.
+    echo "Number: $num"
+done
+
+Example 2: Iterating over Files and directories in a Directory
+---------
+#!/bin/bash
+
+# Example of a for loop iterating over files in a directory
+echo "Files in current directory:"
+for file in *
+do
+    echo "$file"
+done
+
+Example 3: Processing Arguments Passed to a Script
+----------
+#!/bin/bash
+
+# Example of a for loop iterating over script arguments
+echo "Arguments passed to the script:"
+for arg in "$@"
+do
+    echo "$arg"
+done
+
+Example 4:  Generating a Sequence of Numbers
+----------
+#!/bin/bash
+
+# Iterate 5 times
+echo "for loop example"
+for (( i=1; i<=5; i++ ))
+do
+    echo "Iteration: $i"
+done
+
+Example 5: Nested for loop
+----------
+
+#!/bin/bash
+
+# Example of nested for loops to generate a multiplication table
+echo "Multiplication Table (1 to 5):"
+
+for (( i=1; i<=5; i++ ))
+do
+    echo "Multiplication table for $i:"
+    for (( j=1; j<=5; j++ ))
+    do
+        echo "$i * $j = $((i * j))"
+    done
+    echo "----------------------"
+done
+
+j++
+++j
+j--
+--j
+
+6. while Loop
+-------------
+
+The while loop executes a block of code as long as a specified condition is true.
+
+Syntax:
+while [ condition ]; 
+do
+    # Code block to execute as long as condition is true
+done
+
+Example 1: Counting Down from 5 to 1
+----------
+
+#!/bin/bash
+
+# Example of a while loop counting down from 5 to 1
+counter=5
+
+echo "Counting down:"
+while [$counter -gt 0]; do
+    echo "$counter"
+    (( counter-- ))
+done
+
+echo "you are a good automation engineer"
+
+Example 2: Reading Lines from a File
+----------
+
+#!/bin/bash
+
+# Example of a while loop reading lines from a file
+filename="Shell_Scripting_New.txt"
+
+echo "Contents of file:"
+while IFS= read -r line    #IFS: internal Field Separator
+do
+    echo "$line"
+done < "$filename"
+echo "you are a great"
+
+name
+====
+1.
+2.
+3.
+4.
+5.
+exit 
+
+
+Example 3: Processing User Input Until Exit
+----------
+#!/bin/bash
+
+# Example of a while loop processing user input until 'exit' is entered
+echo "Enter names (type 'exit' to quit):"
+
+while :
+do
+    read -p "Name: " name
+    if [ "$name" = "exit" ]; then
+        break
+    fi
+
+    echo "Hello --->$name!"
+
+done
+
+
+echo "you are exited"
+
+Example 4: Calculating Factorial
+----------
+#!/bin/bash
+
+# Example of a while loop calculating factorial of a number
+echo "Enter a number to calculate its factorial:"
+read num
+
+if [ $num -gt 0 ]; then
+
+factorial=1
+counter=$num
+
+while [ $counter -gt 0 ]
+do
+    factorial=$(( factorial * counter ))
+    (( counter-- ))
+done
+
+echo "Factorial of $num is: $factorial"
+
+else
+
+echo "invalid input"
+
+fi
+
+7. until Loop
+-------------
+
+Example 1: Counting Up from 1 to 5
+----------
+
+#!/bin/bash
+
+# Example of an until loop counting up from 1 to 5
+counter=1
+
+echo "Counting up:"
+until [ $counter -gt 10 ]
+do
+    echo "$counter"
+    (( counter++ ))
+done
+
+echo "Done counting!"
+
+Arrays in shell scripting
+=========================
+Def: arrays provide a convenient way to store and manipulate multiple values under a single variable name. 
+
+NOTE: Array values can be accessed by the index [0 to length-1]
+
+Declaring Arrays
+-----------------
+1. Implicit Declaration: 
+Arrays are implicitly declared when you assign values to indexed positions:
+
+name_array=("kk" "sai" "raghu")
+
+2. Explicit Declaration:
+ You can explicitly declare an array by using the declare built-in command:
+
+declare -a name_array
+name_array=("kk" "sai" "raghu")
+
+
+Accessing Array Elements
+--------------------------
+To access individual elements of an array, you use the index (starting from 0):
+
+
+name_array=("kk" "sai" "raghu")
+echo "${name_array[0]}"  # prints "value1"
+echo "${name_array[1]}"  # prints "value2"
+echo "${name_array[2]}"  # prints "value3"
+
+
+Array Operations
+----------------
+
+
+1. Appending Elements
+
+You can append elements to an array using the += operator:
+
+name_array=("kk" "sai" "raghu")
+
+name_array+=("jaswanth")
+
+
+2. Length of Array
+
+To find the length of an array, use ${#name_array[@]}
+
+name_array=("kk" "sai" "raghu")
+
+echo "Length of array: ${#name_array[@]}"  # prints the number of elements in the array
+
+
+3. Iterating Over an Array
+--------------------------
+
+You can iterate over all elements in an array using a loop:
+
+name_array=("kk" "sai" "raghu")
+for element in "${name_array[@]}"
+do
+    echo "$element"
+done
+
+4. Removing Elements
+
+You can unset individual elements by index:
+
+unset name_array[1]  # removes the element at index 1
+
+5. Clearing an Array
+
+To clear all elements in an array:
+
+name_array=()
+
+Example 1
+---------
+#!/bin/bash
+
+# Declare an array
+declare -a fruits=("Apple" "Banana" "Orange")
+
+# Print all elements
+echo "All fruits:"
+for fruit in "${fruits[@]}"
+do
+    echo "$fruit"
+done
+
+# Print length of array
+echo "Number of fruits: ${#fruits[@]}"
+
+# Append an element
+fruits+=("Grapes")
+
+# Print length of array
+echo "Number of fruits: ${#fruits[@]}"
+
+# Access individual element
+echo "First fruit: ${fruits[0]}"
+
+# Remove an element
+unset fruits[1]
+
+# Print updated array
+echo "Remaining fruits:"
+for fruit in "${fruits[@]}"
+do
+    echo "$fruit"
+done
+
+
+Example 2: Processing File Names
+----------
+#!/bin/bash
+
+# Declare an array to store file names
+declare -a files=()
+
+# Populate the array with file names ending in .txt in current directory
+files=(*.sh)
+
+# Iterate over each file and perform an operation (e.g., count lines)
+for file in "${files[@]}"
+do
+    line_count=$(wc -l < "$file")
+    echo "File: $file has $line_count lines."
+done
+
+Example 3: Processing Command-Line Arguments
+---------
+
+
+You might want to process command-line arguments passed to a script and store them in an array.
+
+#!/bin/bash
+
+# Store command-line arguments in an array
+args=("$@")
+
+# Print all arguments
+echo "All arguments:"
+for arg in "${args[@]}"
+do
+    echo "$arg"
+done
+
+echo "Length of array: ${#args[@]}"  # prints the number of elements in the array
+
+# Access individual argument
+echo "First argument: ${args[0]}"
+
+Example 4: Dynamic Menu with User Selection
+----------
+
+You might want to create a dynamic menu using an array of options and allow the user to select an option.
+
+#!/bin/bash
+
+# Array of menu options
+declare -a menu=("Option 1: l1.sh" "Option 2: l2.sh" "Option 3: Exit")
+
+# Display menu options
+echo "Select an option:"
+select option in "${menu[@]}"
+do
+    case $REPLY in
+        1)
+            sh l1.sh
+           ;;
+        2)
+             sh l2.sh
+            ;;
+        3)
+            echo "Exiting..."
+            break
+            ;;
+        *)
+            echo "Invalid option"
+            ;;
+    esac
+done
+
+10/07/2024
+===========
+
+File Descriptors
+================
+
+>
+>>
+<
+
+
+0  ---> std i/p
+
+1 ---> std o/p
+
+2 ---> std error
+
+2>&1
+
+
+
+exit code
+=========
+
+0 to 127  ---->128
+
+
+
+sleep 
+-----
+
+functions in shell scripting
+=============================
+
+
+Def:
+Functions in shell scripting allow you to reuse the code.
+
+---> you can reduse the number of lines of code
+
+Syntax of Defining Functions
+-----------------------------
+
+# Syntax 1: 
+
+function_name () 
+{
+    # Commands to be executed
+    command1
+    command2
+    # ...
+}
+
+# Syntax 2: 
+
+data() 
+{
+echo "I am from Nellore"
+echo "My name Is KK FUNDA"
+date
+echo "KK FUNDA YOUTUBE CHANNEL"
+
+}
+
+
+Example:
+--------
+
+#!/bin/bash
+
+# Define a function that prints a greeting
+testing() 
+{
+    echo "Hello, World!"
+}
+
+# Call the function
+testing
+pwd
+uptime
+testing
+
+
+Passing Parameters to Functions
+-------------------------------
+
+Functions in shell scripts can accept parameters similar to scripts. Parameters are accessed inside the function using positional parameters ($1, $2, ...) or the special variables ($@, $*). Here’s how you define and use a function with parameters:
+
+#!/bin/bash
+
+# Function with parameters
+greet_user() {
+    local name="$1"  # First parameter
+    echo "Hello, $name!"
+}
+
+greet_user "kkfunda"
+
+Example of Using Parameters
+---------
+
+#!/bin/bash
+
+# Function to calculate the sum of two numbers
+sum() {
+    local num1="$1"
+    local num2="$2"
+    local total=$(( num1 + num2 ))
+    echo "Sum of $num1 and $num2 is: $total"
+}
+
+# Call the function with arguments
+sum 10 20
+
+Return Values
+-------------
+
+Shell functions do not have a traditional return statement like other programming languages. Instead, the return status of the last executed command is used as the return value of the function. To explicitly return a value, you can use echo or modify a global variable.
+
+Example
+--------
+
+#!/bin/bash
+
+# Function to calculate the square of a number and return it
+square() {
+    local num="$1"
+    local result=$(( num * num ))
+    echo "$result"  # Return the result
+}
+
+# Call the function and capture the returned value
+output=$(square 5)
+echo "Square of 5 is: $output"
+
+Local Variables and global variables and its Scope
+--------------------------
+
+--> Variables declared inside a function called as a local variable, and variables outside function called as global variables.
+--> Local variable scope is with  in that block only, Global variable scope is entire script.
+
+Example
+-------
+#!/bin/bash
+
+
+global_var="Global"
+
+
+demo_local_var() 
+{
+    local local_var="Local"
+    echo "Inside function: local_var=$local_var, global_var=$global_var"
+}
+
+
+demo_local_var
+
+echo "Outside function: local_var=$local_var"
+echo "Outside function: local_var=$global_var"
+
+Example
+--------
+
+#!/bin/bash
+
+# Function to print numbers from 1 to n
+print_numbers() {
+    local n="$1"
+    for (( i=1; i<=n; i++ ))
+    do
+        echo "$i"
+       sleep 5
+    done
+}
+
+
+print_numbers 5
+
+Realtime examples using functions
+=================================
+
+Example 1: User Management Script
+----------
+
+Scenario: You want to create a script that manages user accounts by adding, deleting, and listing users using functions.
+
+#!/bin/bash
+
+# Function to add a user
+add_user() {
+    local username="$1"
+    sudo useradd -m "$username"
+    echo "User '$username' added successfully."
+}
+
+# Function to delete a user
+delete_user() {
+    local username="$1"
+    sudo userdel -r "$username"
+    if [ $? -eq 0 ] ; then
+    echo "User '$username' deleted successfully."
+    else
+    echo "Invalid user"
+     fi
+}
+
+# Function to list all users
+list_users() {
+    local users=$(cut -d: -f1 /etc/passwd)
+    echo "List of users:"
+    echo "$users"
+}
+
+# Main script logic
+echo "Choose an option:"
+echo "1. Add a user"
+echo "2. Delete a user"
+echo "3. List all users"
+read "Enter your choice: " choice
+
+case $choice in
+    1) read -p "Enter username: " username
+       add_user "$username"
+       ;;
+    2) read -p "Enter username to delete: " username
+       read -p "Are you sure want to delete then press yes or else no:::" decision
+       if [ $decision = "yes" ]
+         then
+         delete_user "$username"
+       else
+       echo "OK no problem leave it"
+        fi
+       ;;
+    3) list_users ;;
+    *) echo "Invalid choice. Exiting." ;;
+esac
+
+Example 2: Function with Conditional Logic
+---------
+#!/bin/bash
+
+# Function to check if a number is even or odd
+check_even_odd() {
+    local number="$1"
+    if (( number % 2 == 0 )); then
+        echo "$number is even."
+    else
+        echo "$number is odd."
+    fi
+}
+
+
+for ((i=1;i<=5;i++))
+{
+read -p "enter a number::" num
+if [ $num -gt -1 ]
+then 
+  check_even_odd num
+else
+echo "pls enter valid input"
+fi
+}
+
+11/07/2024
+-----------
+--> shell
+--> shell scripting
+---> command line arguments
+---> debug mode
+--> read command
+---> variables
+--> operators
+--> control statements
+--> arrays
+--> functions
+
+Example 3: Function with Array Handling
+---------
+#!/bin/bash
+
+# Function to print elements of an array
+print_array() {
+    local arr=("$@")  # Copy all arguments into the array
+    echo "Array elements:"
+    for item in "${arr[@]}"
+    do
+        echo "$item"
+    done
+}
+
+# Example usage with an array
+my_array=("apple" "banana" "cherry" "date")
+print_array "${my_array[@]}"
+
+Example 4: Deleting a file using functions
+---------
+
+step 1: create a function   delete()
+step 2: rm -rf <fn>
+step 3: 
+
+
+stpe 0: delete "fn"
+
+#!/bin/bash
+
+# Function to perform a risky operation
+risky_operation() {
+    local fname="$1"
+    if [ -f "$fname" ]; then
+        echo "Processing file: $fname"
+        # Add risky operation here (e.g., deleting file)
+        rm -rf "$fname" 
+        echo "$file deleted successfully."
+    else
+        echo "Error: File $fname does not exist."
+    fi
+}
+
+read -p "enter aa file name : " fname
+risky_operation  "$fname"
+
+Example 5: Function to Check Disk Usage
+---------
+
+
+#!/bin/bash
+
+# Function to check disk usage
+check_disk_usage() {
+    local threshold=80  # Threshold percentage
+    local disk_usage=$(df -h / | awk 'NR==2 {print $5}' | sed 's/%//')
+    echo "Disk usage: $disk_usage%"
+
+    if (( disk_usage >= threshold )); then
+        echo "Warning: Disk usage exceeds $threshold%."
+        # Add logic to send alert (e.g., email or notification)
+    else
+        echo "Disk usage within limits."
+    fi
+}
+
+# Example usage
+check_disk_usage
+
+
+
+zip_files()
+{
+  zip backup.zip *.log
+  mv backup.zip backup/ 
+}
+
+zip_files
+
+Example 6: Function to Calculate Average
+---------
+
+#!/bin/bash
+
+# Function to calculate average of numbers
+calculate_average() {
+    local total=0
+    local count=0
+    for num in "$@"
+    do
+        total=$(( total + num ))
+        (( count++ ))
+    done
+    local average=$(( total / count ))
+    echo "Average: $average"
+}
+
+# Example usage
+calculate_average 10 20 30
+calculate_average 5 15 25 35 45
+
+
+Example 7:  install any package
+---------
+#!/bin/bash
+
+# Function to check and restart service if not running
+install() {
+    local arg="$1"
+   sudo yum install $arg -y
+  
+}
+
+un_install()
+{
+    local arg="$1"
+   sudo yum remove $arg -y
+  
+}
+echo "enter package name"
+read package
+install "$package"
+
+
+Example 8: Function for System Information Reporting
+----------
+
+#!/bin/bash
+
+# Function to gather system information
+gather_system_info() {
+    local hostname=$(hostname)
+    local kernel=$(uname -r)
+    local cpu_cores=$(cat /proc/cpuinfo|grep -i "cpu cores" |awk '{print $4}')
+    local memory=$(free -h |awk '/Mem/{print $7}')
+    local disk_usage=$(df -h / | awk 'NR==2 {print $5}')
+
+    echo "System Information:"
+    echo "=================="
+    echo "Hostname: $hostname"
+    echo "kernel : $kernel"
+    echo "CPU cores: $cpu_cores"
+    echo "Total memory: ${memory}MB"
+    echo "Disk usage: $disk_usage used"
+}
+
+
+gather_system_info
+
+#!/bin/bash
+
+# Directory to clean up
+TARGET_DIR="/home/ec2-user/"
+
+# Number of days to keep files
+DAYS=2
+
+# Find and delete files older than $DAYS
+aaa=find "$TARGET_DIR" -type f -mtime +$DAYS
+echo $aaa
+
+
+0 2 * * * /path/to/delete.sh
+
+
