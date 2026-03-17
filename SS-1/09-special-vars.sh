@@ -8,4 +8,4 @@ echo "Home directory of current user: $HOME"
 echo "PID of the script executing now: $$"
 sleep 100 &
 echo "PID of last background command: $!"
-echo "exis status of previous command 0-Success, 1-fail $?"
+echo "exis status of previous command 0-Success, 127-fail $?"
